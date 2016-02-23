@@ -1,4 +1,4 @@
-# uitable [![GoDoc](https://godoc.org/github.com/gosuri/uitable?status.svg)](https://godoc.org/github.com/gosuri/uitable) [![Build Status](https://travis-ci.org/gosuri/uitable.svg?branch=master)](https://travis-ci.org/gosuri/uitable)
+# uitable [![GoDoc](https://godoc.org/github.com/hico-horiuchi/uitable?status.svg)](https://godoc.org/github.com/hico-horiuchi/uitable) [![Build Status](https://travis-ci.org/hico-horiuchi/uitable.svg?branch=master)](https://travis-ci.org/hico-horiuchi/uitable)
 
 uitable is a go library for representing data as tables for terminal applications. It provides primitives for sizing and wrapping columns to improve readability.
 
@@ -59,9 +59,9 @@ Bio:      Alan was a British pioneering computer scientist, mathematician, logic
 ## Installation
 
 ```
-$ go get -v github.com/gosuri/uitable
+$ go get -v github.com/hico-horiuchi/uitable
 ```
 
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/gosuri/uitable/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/hico-horiuchi/uitable/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 

@@ -6,8 +6,8 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/gosuri/uitable/util/strutil"
-	"github.com/gosuri/uitable/util/wordwrap"
+	"github.com/hico-horiuchi/uitable/util/strutil"
+	"github.com/hico-horiuchi/uitable/util/wordwrap"
 	"github.com/mattn/go-runewidth"
 )
 

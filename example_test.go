@@ -3,7 +3,7 @@ package uitable_test
 import (
 	"fmt"
 
-	"github.com/gosuri/uitable"
+	"github.com/hico-horiuchi/uitable"
 )
 
 type hacker struct {
