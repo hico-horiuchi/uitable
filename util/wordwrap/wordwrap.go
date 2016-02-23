@@ -3,8 +3,10 @@ package wordwrap
 
 import (
 	"bytes"
-	"github.com/mattn/go-runewidth"
 	"unicode"
+
+	"github.com/hico-horiuchi/uitable/util/ansi"
+	runewidth "github.com/mattn/go-runewidth"
 )
 
 // WrapString wraps the given string within lim width in characters.
@@ -14,6 +16,9 @@ import (
 // pathological cases can dramatically reach past the limit, such as a very
 // long word.
 func WrapString(s string, lim uint) string {
+	arr := ansi.Match(s)
+	s = ansi.Remove(s)
+
 	// Initialize a buffer with a slightly larger size to account for breaks
 	init := make([]byte, 0, len(s))
 	buf := bytes.NewBuffer(init)
@@ -80,5 +85,5 @@ func WrapString(s string, lim uint) string {
 		wordBuf.WriteTo(buf)
 	}
 
-	return buf.String()
+	return ansi.Patch(buf.String(), arr)
 }

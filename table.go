@@ -6,9 +6,10 @@ import (
 	"strings"
 	"sync"
 
+	"github.com/hico-horiuchi/uitable/util/ansi"
 	"github.com/hico-horiuchi/uitable/util/strutil"
 	"github.com/hico-horiuchi/uitable/util/wordwrap"
-	"github.com/mattn/go-runewidth"
+	runewidth "github.com/mattn/go-runewidth"
 )
 
 // Separator is the default column seperator
@@ -178,7 +179,7 @@ type Cell struct {
 func (c *Cell) LineWidth() uint {
 	width := 0
 	for _, s := range strings.Split(c.String(), "\n") {
-		w := runewidth.StringWidth(s)
+		w := runewidth.StringWidth(ansi.Remove(s))
 		if w > width {
 			width = w
 		}
