@@ -6,46 +6,45 @@ import (
 	"strings"
 )
 
-type CodeStruct struct {
-	Index    int
-	Submatch string
+type code struct {
+	index    int
+	submatch string
 }
 
-const code = `\x1B\[\d{1,3}[mK]`
+const pattern = `\x1B\[\d{1,3}[mK]`
 
 // Match returns ANSI escape codes in the given string.
-func Match(s string) []CodeStruct {
-	r := regexp.MustCompile(code)
+func Match(s string) []code {
+	r := regexp.MustCompile(pattern)
 	is := r.FindAllStringIndex(s, -1)
-	a := make([]CodeStruct, len(is))
+	a := make([]code, len(is))
 	for k, v := range r.FindAllStringSubmatch(s, -1) {
-		a[k] = CodeStruct{
-			Index:    is[k][0],
-			Submatch: v[0],
+		a[k] = code{
+			index:    is[k][0],
+			submatch: v[0],
 		}
 	}
 	return a
 }
 
 // Patch joins ANSI escape codes to the given string.
-func Patch(s string, a []CodeStruct) string {
+func Patch(s string, a []code) string {
 	var b, c, i int
 	for _, v := range a {
-		i = v.Index + b
-		if i > len(s) || strings.TrimSpace(s[i:]) == "..." {
+		i = v.index + b
+		if i > len(s) {
 			return s + "\x1b[0m"
+		} else if strings.TrimSpace(s[i:]) == "..." {
+			return strings.TrimRight(s, "...") + "\x1b[0m..."
 		}
-		if c = strings.Count(s[i:], "\n"); c == 0 {
-			s = s[:i] + v.Submatch + s[i:]
-			continue
-		}
-		s = s[:i] + v.Submatch + strings.Replace(s[i:], "\n", "\x1b[0m\n"+v.Submatch, -1)
-		b += len("\x1b[0m\n"+v.Submatch) * c
+		b += strings.Count(s[c:i], " \n")
+		c = v.index + b
+		s = s[:c] + v.submatch + s[c:]
 	}
 	return s
 }
 
 // Remove removes ANSI escape codes from the given string.
 func Remove(s string) string {
-	return regexp.MustCompile(code).ReplaceAllString(s, "")
+	return regexp.MustCompile(pattern).ReplaceAllString(s, "")
 }
